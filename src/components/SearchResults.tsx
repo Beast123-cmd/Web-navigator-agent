@@ -94,7 +94,57 @@ const SearchResults = ({ query, isLoading, results }: SearchResultsProps) => {
     );
   }
 
-  if (!results.length) return null;
+  if (!results.length) {
+    return (
+      <Card className="shadow-medium animate-fade-in-up">
+        <CardContent className="p-12">
+          <div className="text-center space-y-6">
+            <div className="w-20 h-20 mx-auto bg-gradient-primary rounded-full flex items-center justify-center">
+              <Search className="h-10 w-10 text-primary-foreground" />
+            </div>
+            
+            <div className="space-y-2">
+              <h3 className="text-xl font-semibold text-foreground">No Results Found</h3>
+              <p className="text-muted-foreground max-w-md mx-auto">
+                We couldn't find any products matching "{query}". Try adjusting your search terms or filters.
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button variant="outline">
+                <Search className="mr-2 h-4 w-4" />
+                Try Different Keywords
+              </Button>
+              <Button variant="ghost">
+                <Filter className="mr-2 h-4 w-4" />
+                Adjust Filters
+              </Button>
+            </div>
+            
+            <div className="pt-6 border-t border-border">
+              <p className="text-sm text-muted-foreground mb-4">Suggested searches:</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {["laptops under 50k", "gaming laptops", "ultrabooks", "workstation laptops"].map((suggestion, index) => (
+                  <Button
+                    key={index}
+                    variant="secondary"
+                    size="sm"
+                    className="text-xs"
+                    onClick={() => {
+                      // This would trigger a new search
+                      console.log(`Searching for: ${suggestion}`);
+                    }}
+                  >
+                    {suggestion}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   const displayResults = showAll ? results : results.slice(0, 6);
 
