@@ -41,11 +41,11 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-gradient-primary rounded-lg shadow-glow">
+            <div className="p-2 ">
               <img 
                 src="/logo.png" 
                 alt="Web Navigator AI Logo" 
-                className="h-6 w-6 object-contain"
+                className="h-12 w-12 object-contain"
               />
             </div>
             <div>
