@@ -158,7 +158,6 @@ const Analytics = () => {
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {topInsights.map((insight, index) => (
-          <Card key={index} className="shadow-soft hover:shadow-medium transition-shadow">
       <Card key={index} className="shadow-soft hover:shadow-medium transition-all duration-300 hover:scale-105">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
@@ -191,7 +190,6 @@ const Analytics = () => {
       {/* Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Price Distribution */}
-        <Card className="shadow-medium">
     <Card className="shadow-medium transition-all duration-300 hover:scale-[1.02]">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
@@ -230,7 +228,6 @@ const Analytics = () => {
         </Card>
 
         {/* Brand Analysis */}
-        <Card className="shadow-medium">
     <Card className="shadow-medium transition-all duration-300 hover:scale-[1.02]">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
@@ -281,7 +278,6 @@ const Analytics = () => {
       </div>
 
       {/* Rating Trends */}
-      <Card className="shadow-medium">
   <Card className="shadow-medium transition-all duration-300 hover:scale-[1.02]">
         <CardHeader>
           <CardTitle className="flex items-center space-x-2">

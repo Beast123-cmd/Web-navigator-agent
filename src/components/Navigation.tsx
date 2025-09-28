@@ -1,18 +1,26 @@
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { 
   BarChart3, 
   Search, 
   GitCompareArrows, 
   TrendingUp,
-  Brain
+  Brain,
+  LogIn
 } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navigationItems = [
   {
-    name: "Dashboard",
+    name: "Home",
     href: "/",
     icon: Search,
+  },
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+    icon: TrendingUp,
   },
   {
     name: "Comparison",
@@ -33,8 +41,12 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-gradient-primary rounded-lg shadow-glow">
-              <Brain className="h-6 w-6 text-primary-foreground" />
+            <div className="p-2 ">
+              <img 
+                src="/logo.png" 
+                alt="Web Navigator AI Logo" 
+                className="h-12 w-12 object-contain"
+              />
             </div>
             <div>
               <h1 className="text-lg font-semibold text-foreground">
@@ -45,25 +57,36 @@ const Navigation = () => {
           </div>
 
           {/* Navigation Links */}
-          <div className="flex space-x-1">
-            {navigationItems.map((item) => (
-              <NavLink
-                key={item.name}
-                to={item.href}
-                end={item.href === "/"}
-                className={({ isActive }) =>
-                  cn(
-                    "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
-                    isActive
-                      ? "bg-primary text-primary-foreground shadow-medium"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                  )
-                }
-              >
-                <item.icon className="h-4 w-4 mr-2" />
-                {item.name}
-              </NavLink>
-            ))}
+          <div className="flex items-center space-x-4">
+            <div className="flex space-x-1">
+              {navigationItems.map((item) => (
+                <NavLink
+                  key={item.name}
+                  to={item.href}
+                  end={item.href === "/"}
+                  className={({ isActive }) =>
+                    cn(
+                      "flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                      isActive
+                        ? "bg-primary text-primary-foreground shadow-medium"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    )
+                  }
+                >
+                  <item.icon className="h-4 w-4 mr-2" />
+                  {item.name}
+                </NavLink>
+              ))}
+            </div>
+            <div className="flex items-center space-x-2">
+              <Button variant="outline" size="sm" asChild>
+                <NavLink to="/login">
+                  <LogIn className="h-4 w-4 mr-2" />
+                  Login
+                </NavLink>
+              </Button>
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>

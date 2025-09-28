@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import QueryInput from "@/components/QueryInput";
 import SearchResults from "@/components/SearchResults";
 import AgentFlow from "@/components/AgentFlow";
@@ -11,7 +12,8 @@ import {
   Globe, 
   Zap,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  Search
 } from "lucide-react";
 
 // Mock data for dashboard stats
@@ -168,7 +170,7 @@ const Dashboard = () => {
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
           {stats.map((stat, index) => (
-            <Card key={index} className="shadow-soft hover:shadow-medium transition-shadow">
+            <Card key={index} className="animate-card-hover animate-fade-in-up shadow-soft" style={{ animationDelay: `${index * 0.1}s` }}>
               <CardContent className="p-4 sm:p-6">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
                   <div className="mb-2 sm:mb-0">
@@ -178,7 +180,7 @@ const Dashboard = () => {
                     </p>
                     <p className="text-xs sm:text-sm text-success mt-1">{stat.change}</p>
                   </div>
-                  <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
+                  <div className="p-2 sm:p-3 bg-primary/10 rounded-lg animate-pulse-slow">
                     <stat.icon className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
                   </div>
                 </div>
@@ -189,7 +191,7 @@ const Dashboard = () => {
 
         {/* Search Results Display */}
         {hasSearched && (
-          <div className="mb-8">
+          <div className="mb-8 animate-fade-in-up">
             <SearchResults 
               query={`${mode.toUpperCase()}: ${query}`}
               isLoading={isProcessing}
@@ -200,44 +202,93 @@ const Dashboard = () => {
 
         {/* Recent Activity - Only show if no search has been made */}
         {!hasSearched && (
-          <Card className="shadow-medium">
-            <CardHeader>
-              <CardTitle className="flex items-center space-x-2">
-                <TrendingUp className="h-5 w-5 text-primary" />
-                <span className="text-lg sm:text-xl">Recent Query Activity</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {recentQueries.map((item, index) => (
-                  <div key={index} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-card-header rounded-lg space-y-2 sm:space-y-0">
-                    <div className="flex-1">
-                      <p className="font-medium text-foreground">{item.query}</p>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {item.timestamp}
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      {item.status === "completed" && (
-                        <div className="text-center">
-                          <p className="text-sm font-medium text-foreground">
-                            {item.results} results
-                          </p>
-                          <Badge variant="default" className="bg-success">
-                            Completed
-                          </Badge>
-                        </div>
-                      )}
-                      {item.status === "processing" && (
-                        <Badge variant="secondary">Processing</Badge>
-                      )}
-                      <ArrowRight className="h-4 w-4 text-muted-foreground" />
+          <div className="space-y-8">
+            {/* Empty State */}
+            <Card className="shadow-medium animate-fade-in-up">
+              <CardContent className="p-12">
+                <div className="text-center space-y-6">
+                  <div className="w-20 h-20 mx-auto bg-gradient-primary rounded-full flex items-center justify-center animate-bounce-gentle">
+                    <Search className="h-10 w-10 text-primary-foreground" />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-semibold text-foreground">Start Your First Query</h3>
+                    <p className="text-muted-foreground max-w-md mx-auto">
+                      Discover insights and compare data across multiple sources with our intelligent AI agents.
+                    </p>
+                  </div>
+                  
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <Button size="lg" className="group">
+                      <Zap className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
+                      Try a Search
+                    </Button>
+                    <Button variant="outline" size="lg">
+                      <Globe className="mr-2 h-4 w-4" />
+                      Explore Features
+                    </Button>
+                  </div>
+                  
+                  <div className="pt-6 border-t border-border">
+                    <p className="text-sm text-muted-foreground mb-4">Popular search examples:</p>
+                    <div className="flex flex-wrap justify-center gap-2">
+                      {["laptops under 50k", "best smartphones 2024", "compare headphones", "electric vehicles"].map((example, index) => (
+                        <Button
+                          key={index}
+                          variant="secondary"
+                          size="sm"
+                          className="text-xs"
+                          onClick={() => handleQuerySubmit(example)}
+                        >
+                          {example}
+                        </Button>
+                      ))}
                     </div>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Recent Activity */}
+            <Card className="shadow-medium animate-fade-in-up">
+              <CardHeader>
+                <CardTitle className="flex items-center space-x-2">
+                  <TrendingUp className="h-5 w-5 text-primary animate-bounce-gentle" />
+                  <span className="text-lg sm:text-xl">Recent Query Activity</span>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {recentQueries.map((item, index) => (
+                    <div key={index} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-card-header rounded-lg space-y-2 sm:space-y-0 animate-slide-in-right hover:bg-muted/50 transition-colors" style={{ animationDelay: `${index * 0.1}s` }}>
+                      <div className="flex-1">
+                        <p className="font-medium text-foreground">{item.query}</p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {item.timestamp}
+                        </p>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        {item.status === "completed" && (
+                          <div className="text-center">
+                            <p className="text-sm font-medium text-foreground">
+                              {item.results} results
+                            </p>
+                            <Badge variant="default" className="bg-success">
+                              Completed
+                            </Badge>
+                          </div>
+                        )}
+                        {item.status === "processing" && (
+                          <Badge variant="secondary">Processing</Badge>
+                        )}
+                        <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         )}
       </div>
 
