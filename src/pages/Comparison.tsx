@@ -28,7 +28,7 @@ const defaultComparisonData = [
   {
     id: 1,
     name: "Sony WH-1000XM5",
-    price: "$349.99",
+    price: "₹31033.61",
     rating: 4.8,
     features: ["Noise Cancelling", "30h Battery", "Touch Controls"],
     link: "https://example.com/sony",
@@ -37,7 +37,7 @@ const defaultComparisonData = [
   {
     id: 2,
     name: "Bose QuietComfort 45",
-    price: "$329.99", 
+    price: "₹29260.21", 
     rating: 4.7,
     features: ["Noise Cancelling", "24h Battery", "Voice Assistant"],
     link: "https://example.com/bose",
@@ -46,7 +46,7 @@ const defaultComparisonData = [
   {
     id: 3,
     name: "Apple AirPods Max",
-    price: "$549.99",
+    price: "₹48767.61",
     rating: 4.6,
     features: ["Spatial Audio", "20h Battery", "Digital Crown"],
     link: "https://example.com/apple",
@@ -55,7 +55,7 @@ const defaultComparisonData = [
   {
     id: 4,
     name: "Sennheiser HD 660S",
-    price: "$499.99",
+    price: "₹44334.11",
     rating: 4.9,
     features: ["Open-back", "Audiophile", "Replaceable Cable"],
     link: "https://example.com/sennheiser",
@@ -64,7 +64,7 @@ const defaultComparisonData = [
   {
     id: 5,
     name: "Audio-Technica ATH-M50x",
-    price: "$149.99",
+    price: "₹13299.61",
     rating: 4.5,
     features: ["Studio Monitor", "Foldable", "Detachable Cable"],
     link: "https://example.com/audiotechnica",
